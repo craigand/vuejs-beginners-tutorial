@@ -8,11 +8,8 @@
   </head>
   <body>
     <div id="app">
-      <input v-model="newName" /> <button @click="addName">Add name</button>
-      <button @click="clearNames">Clear names</button>
-      <ul>
-        <li v-for="name in names">{{ name }}</li>
-      </ul>
+      {{ changeName }} <br />
+      <input v-model="newName" />
     </div>
 
     <script>
@@ -20,15 +17,11 @@
         el: "#app",
         data: {
           newName: "",
-          names: [],
         },
-        methods: {
-          addName: function () {
-            this.names.push(this.newName);
-            this.newName = "";
-          },
-          clearNames: function () {
-            this.names = [];
+        methods: {},
+        computed: {
+          changeName: function () {
+            return this.newName.toUpperCase();
           },
         },
       });
