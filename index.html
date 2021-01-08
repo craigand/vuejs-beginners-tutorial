@@ -8,17 +8,16 @@
   </head>
   <body>
     <div id="app">
-      <span v-if="name">Hello, {{ name }}! </span>
-      <span v-else>Please enter your name below</span>
-      <br />
-      <input v-model="name" />
+      <ul>
+        <li v-for="name in names">{{ name }}</li>
+      </ul>
     </div>
 
     <script>
       var vue = new Vue({
         el: "#app",
         data: {
-          name: "",
+          names: ["Andy", "Bob", "Sarah", "John"],
         },
       });
     </script>
