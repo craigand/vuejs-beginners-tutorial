@@ -8,8 +8,13 @@
   </head>
   <body>
     <div id="app">
-      {{ changeName }} <br />
-      <input v-model="newName" />
+      <input v-model="newName" @input="checkNameLength" />
+      <button v-bind:disabled="buttonDisabled" @click="addName">
+        Add name
+      </button>
+      <ul>
+        <li v-for="name in names">{{ name }}</li>
+      </ul>
     </div>
 
     <script>
@@ -17,13 +22,23 @@
         el: "#app",
         data: {
           newName: "",
+          buttonDisabled: true,
+          names: ["Andy", "Bob", "Steve"],
         },
-        methods: {},
-        computed: {
-          changeName: function () {
-            return this.newName.toUpperCase();
+        methods: {
+          addName: function () {
+            this.names.push(this.newName);
+            this.newName = "";
+          },
+          checkNameLength: function () {
+            if (this.newName.length < 3) {
+              this.buttonDisabled = true;
+            } else {
+              this.buttonDisabled = false;
+            }
           },
         },
+        computed: {},
       });
     </script>
   </body>
