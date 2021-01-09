@@ -8,20 +8,74 @@
   </head>
   <body>
     <div id="app">
-      {{ changeName }} <br />
-      <input v-model="newName" />
+      <label>First name: <input v-model="firstName" /></label><br /><br />
+      <label>Last name: <input v-model="lastName" /></label><br /><br />
+      <label>Email: <input v-model="emailAddress" /></label><br /><br />
+
+      <input type="radio" id="male" value="male" v-model="gender" /><label
+        for="male"
+        >Male</label
+      >
+      <input type="radio" id="female" value="female" v-model="gender" />
+      <label for="female">Female</label>
+      <br /><br />
+      <label for="newsletter">Sign up for newsletter: </label>
+      <select v-model="newsletter" id="newsletter">
+        <option value="">Please select...</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <br /><br />
+      <input type="checkbox" id="iAgree" v-model="iAgree" /><label for="iAgree"
+        >I agree to the terms and conditions</label
+      >
+      <br /><br />
+      <span>Please enter your message:</span>
+      <br />
+      <textarea cols="30" rows="5" v-model="message"></textarea>
+
+      <br /><br />
+
+      <button :disabled="!checkFormValid">Submit form</button>
     </div>
 
     <script>
       var vue = new Vue({
         el: "#app",
         data: {
-          newName: "",
+          firstName: "",
+          lastName: "",
+          emailAddress: "",
+          gender: "",
+          newsletter: "",
+          iAgree: false,
+          message: "",
         },
-        methods: {},
+        methods: {
+          checkHasData: function (value) {
+            if (value.length > 0) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          submitForm: function () {},
+        },
         computed: {
-          changeName: function () {
-            return this.newName.toUpperCase();
+          checkFormValid: function () {
+            if (
+              this.checkHasData(this.firstName) &&
+              this.checkHasData(this.lastName) &&
+              this.checkHasData(this.emailAddress) &&
+              this.gender &&
+              this.newsletter &&
+              this.iAgree === true &&
+              this.checkHasData(this.message)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
           },
         },
       });
