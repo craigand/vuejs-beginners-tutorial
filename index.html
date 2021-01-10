@@ -8,11 +8,13 @@
   </head>
   <body>
     <div id="app">
-      <button-counter color="red"></button-counter>
-      <button-counter color="blue"></button-counter>
-      <button-counter color="green"></button-counter>
-      <button-counter color="yellow"></button-counter>
-      <button-counter color="orange"></button-counter>
+      <button-counter @update-count="incrementCount"></button-counter>
+      <button-counter @update-count="incrementCount"></button-counter>
+      <button-counter @update-count="incrementCount"></button-counter>
+      <button-counter @update-count="incrementCount"></button-counter>
+      <button-counter @update-count="incrementCount"></button-counter>
+      <br /><br />
+      <span>Main count: {{ count }}</span>
     </div>
 
     <script>
@@ -22,8 +24,14 @@
             count: 0,
           };
         },
-        props: ["color"],
-        template: "<button>Color {{ color }} </button>",
+        methods: {
+          incrementCount: function () {
+            this.count++;
+            this.$emit("update-count", this.count);
+          },
+        },
+        template:
+          "<button @click='incrementCount'>You clicked {{ count }} times.</button>",
       });
 
       var vue = new Vue({
@@ -31,7 +39,11 @@
         data: {
           count: 0,
         },
-        methods: {},
+        methods: {
+          incrementCount: function (newCount) {
+            this.count = newCount;
+          },
+        },
         computed: {},
       });
     </script>
