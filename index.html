@@ -7,117 +7,32 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   </head>
   <body>
-    <style>
-      .failed {
-        background-color: red;
-      }
-      .success {
-        background-color: lightgreen;
-      }
-    </style>
-
     <div id="app">
-      <label
-        >First name:
-        <input
-          v-model="firstName"
-          :class="[firstName ? 'success' : 'failed']" /></label
-      ><br /><br />
-
-      <label
-        >Last name:
-        <input
-          v-model="lastName"
-          :class="[lastName ? 'success' : 'failed']" /></label
-      ><br /><br />
-
-      <label
-        >Email:
-        <input
-          v-model="emailAddress"
-          :class="[emailAddress ? 'success' : 'failed']" /></label
-      ><br /><br />
-
-      <input type="radio" id="male" value="male" v-model="gender" /><label
-        for="male"
-        :class="[gender ? 'success' : 'failed']"
-        >Male</label
-      >
-      <input type="radio" id="female" value="female" v-model="gender" />
-      <label for="female" :class="[gender ? 'success' : 'failed']"
-        >Female</label
-      >
-      <br /><br />
-      <label for="newsletter">Sign up for newsletter: </label>
-      <select
-        v-model="newsletter"
-        id="newsletter"
-        :class="[newsletter? 'success' : 'failed']"
-      >
-        <option value="">Please select...</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-      <br /><br />
-      <input type="checkbox" id="iAgree" v-model="iAgree" /><label
-        for="iAgree"
-        :class="[iAgree ? 'success' : 'failed']"
-        >I agree to the terms and conditions</label
-      >
-      <br /><br />
-      <span>Please enter your message:</span>
-      <br />
-      <textarea
-        cols="30"
-        rows="5"
-        v-model="message"
-        :class="[message ? 'success' : 'failed']"
-      ></textarea>
-
-      <br /><br />
-
-      <button :disabled="!checkFormValid">Submit form</button>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
     </div>
 
     <script>
+      Vue.component("button-counter", {
+        data: function () {
+          return {
+            count: 0,
+          };
+        },
+        template:
+          '<button @click="count++">You clicked me {{ count }} times.</button>',
+      });
+
       var vue = new Vue({
         el: "#app",
         data: {
-          firstName: "",
-          lastName: "",
-          emailAddress: "",
-          gender: "",
-          newsletter: "",
-          iAgree: false,
-          message: "",
+          count: 0,
         },
-        methods: {
-          checkHasData: function (value) {
-            if (value.length > 0) {
-              return true;
-            } else {
-              return false;
-            }
-          },
-          submitForm: function () {},
-        },
-        computed: {
-          checkFormValid: function () {
-            if (
-              this.checkHasData(this.firstName) &&
-              this.checkHasData(this.lastName) &&
-              this.checkHasData(this.emailAddress) &&
-              this.gender &&
-              this.newsletter &&
-              this.iAgree === true &&
-              this.checkHasData(this.message)
-            ) {
-              return true;
-            } else {
-              return false;
-            }
-          },
-        },
+        methods: {},
+        computed: {},
       });
     </script>
   </body>
