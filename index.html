@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="app">
-      <button-counter></button-counter>
-      <button-counter></button-counter>
-      <button-counter></button-counter>
-      <button-counter></button-counter>
-      <button-counter></button-counter>
+      <button-counter color="red"></button-counter>
+      <button-counter color="blue"></button-counter>
+      <button-counter color="green"></button-counter>
+      <button-counter color="yellow"></button-counter>
+      <button-counter color="orange"></button-counter>
     </div>
 
     <script>
@@ -22,8 +22,8 @@
             count: 0,
           };
         },
-        template:
-          '<button @click="count++">You clicked me {{ count }} times.</button>',
+        props: ["color"],
+        template: "<button>Color {{ color }} </button>",
       });
 
       var vue = new Vue({
